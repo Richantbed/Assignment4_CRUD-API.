@@ -3,6 +3,10 @@ package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+
+
 
 import java.util.List;
 
@@ -10,7 +14,7 @@ import java.util.List;
  * AnimalController.java
  * This controller defines all REST API endpoints for managing Animal objects.
  */
-@RestController
+@Controller
 @RequestMapping("/animals")
 public class AnimalController {
 
@@ -24,8 +28,10 @@ public class AnimalController {
      * @return a list of all Animal objects.
      */
     @GetMapping("/all")
-    public List<Animal> getAllAnimals() {
-        return service.getAllAnimals();
+    public String getAllAnimals(Model model) {
+        model.addAttribute("animalList", service.getAllAnimals());
+        model.addAttribute("title", "All Animals");
+        return "animal-list";
     }
 
     /**
@@ -120,6 +126,18 @@ public class AnimalController {
     public List<Animal> deleteAnimalById(@PathVariable int animalId) {
         service.deleteAnimalById(animalId);
         return service.getAllAnimals();
+    }
+
+    public String showCreateForm(Model model) {
+        model.addAttribute("animal", new Animal());  // Creates a blank animal object for the form
+        return "animal-create";  // Returns animal-create.html view
+    }
+
+
+    @GetMapping("/update/{id}")
+    public String showUpdateForm(@PathVariable int id, Model model) {
+        model.addAttribute("animal", AnimalService.getAnimalById(id));  // Fetches animal by ID
+        return "animal-update";  // Returns animal-update.html view
     }
 }
 

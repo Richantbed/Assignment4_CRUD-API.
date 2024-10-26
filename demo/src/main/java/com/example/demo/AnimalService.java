@@ -10,11 +10,14 @@ import java.util.List;
  * This service handles the operations for managing Animal data,
  * acting as the intermediary between the AnimalController and AnimalRepository.
  */
+
+
+
 @Service
 public class AnimalService {
 
     @Autowired
-    private AnimalRepository animalRepository;
+    private static AnimalRepository animalRepository;
 
     /**
      * Retrieves a list of all animals in the database.
@@ -31,7 +34,7 @@ public class AnimalService {
      * @param animalId the ID of the animal to retrieve.
      * @return the Animal object, or null if not found.
      */
-    public Animal getAnimalById(int animalId) {
+    public static Animal getAnimalById(int animalId) {
         return animalRepository.findById(animalId).orElse(null);
     }
 

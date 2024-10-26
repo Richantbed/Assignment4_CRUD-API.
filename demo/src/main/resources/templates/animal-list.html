@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Animal List</title>
+</head>
+<body>
+<h1>Animal List</h1>
+
+<!-- Button to Create New Animal -->
+<a href="/students/new" class="btn btn-outline-primary">Create New Student</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Major</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="student : ${studentList}">
+        <td>
+            <a data-th-href="@{/students/{studentId}(studentId=${student.studentId})}"
+               data-th-text="${student.studentId}"></a>
+        </td>
+        <td data-th-text="${student.name}"></td>
+        <td data-th-text="${student.major}"></td>
+        <td>
+            <!-- Link to delete the student -->
+            <a data-th-href="@{/students/delete/{studentId}(studentId=${student.studentId})}"
+               class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
