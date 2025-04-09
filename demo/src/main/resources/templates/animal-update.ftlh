@@ -2,23 +2,25 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update Student</title>
+  <title>Update Animal</title>
 </head>
 <body>
-<h1>Update Student</h1>
-<form th:action="@{/students/update}" th:object="${student}" method="post">
-    <input type="hidden" th:field="*{studentId}"/>
+<h1>Update Animal</h1>
+
+<form action="/animals/update" method="post">
+    <input type="hidden" name="id" value="${animal.id}"/>
 
     <label>Name:</label>
-    <input type="text" th:field="*{name}" /><br/>
+    <input type="text" name="name" value="${animal.name}" /><br/>
 
-    <label>Major:</label>
-    <input type="text" th:field="*{major}" /><br/>
+    <label>Species:</label>
+    <input type="text" name="species" value="${animal.species}" /><br/>
 
-    <label>GPA:</label>
-    <input type="number" step="0.01" th:field="*{gpa}" /><br/>
+    <label>Age:</label>
+    <input type="number" name="age" value="${animal.age}" /><br/>
 
     <button type="submit">Update</button>
 </form>
+
 </body>
 </html>
